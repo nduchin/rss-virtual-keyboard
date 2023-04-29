@@ -1,6 +1,6 @@
 import './keyboard.css';
 import Key from '../key/key';
-import keyMap from '../../key-map/key-map';
+import keyMap from '../../data/key-map';
 
 const CssClasses = {
   BLOCK: 'keyboard',

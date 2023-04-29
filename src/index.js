@@ -1,3 +1,4 @@
+import './normalize.css';
 import './app/component/textarea/textarea';
 import createKeyboard from './app/component/keyboard/keyboard';
 

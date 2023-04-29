@@ -24,7 +24,7 @@ class Key {
     this.keyId = keyMapItem.keyCode;
     this.keyValues = keyMapItem.keyVal;
     this.textElements = [];
-    this.shellElement = document.createElement('div');
+    this.shellElement = document.createElement('button');
 
     /* Basic markup */
     this.shellElement.className = [CssClasses.BLOCK, CssClasses.SHELL].join(' ');
