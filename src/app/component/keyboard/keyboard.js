@@ -1,5 +1,5 @@
 import './keyboard.css';
-import { Key } from '../key/key';
+import KeyInterface from '../key/key-interface';
 import keyMap from '../../data/key-map';
 import createElement from '../../utils/create-element';
 import KeyboardEventHandler from '../../utils/keyboard-handler';
@@ -17,8 +17,8 @@ function createKeyboard() {
   keyMap.forEach((keyRow) => {
     const row = createElement({ tagName: 'div', className: CssClasses.ROW });
     keyRow.forEach((keyItem) => {
-      const key = new Key(keyItem);
-      row.append(key.getHtmlElem());
+      const key = new KeyInterface(keyItem);
+      row.append(key.shellElement);
       keyboardHandler.bound(key);
     });
     keyboard.append(row);
