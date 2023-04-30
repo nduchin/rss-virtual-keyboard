@@ -90,7 +90,7 @@ class KeyInterface {
         if (this.keyType === 'letter') {
           swap = !(KeyInterface.case[0] === KeyInterface.case[1]);
         } else {
-          swap = !!KeyInterface.case[1];
+          swap = !!KeyInterface.case[0];
         }
       }
 
