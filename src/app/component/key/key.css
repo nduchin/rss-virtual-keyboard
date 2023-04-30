@@ -66,16 +66,17 @@
   box-shadow: 0 3px 3px rgba(19, 32, 27, 0.8)
 }
 /* TODO: rename pseudo -lasses */
-.key__shell:active{
+.key__shell:active, .key__shell_active{
   transform: translateY(2px);
   box-shadow: 0 1px 4px black;
 }
-.key__shell_type_char:active{
+
+.key__shell_type_char:active, .key__shell_type_char.key__shell_active{
   background-color: #c8ff2f;
 }
-.key__shell_type_sub:active{
+.key__shell_type_sub:active, .key__shell_type_sub.key__shell_active{
   background-color: #e4d449;
 }
-.key__shell_type_spec:active{
-  background-color: #772c19;
+.key__shell_type_spec:active, .key__shell_type_spec.key__shell_active{
+  background-color: #be1212;
 }

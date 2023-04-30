@@ -1,4 +1,5 @@
 import './key.css';
+import createElement from '../../utils/create-element';
 
 const CssClasses = {
   BLOCK: 'key',
@@ -15,6 +16,7 @@ const CssClasses = {
   DESC_ALT: 'key__desc_type_alt',
   DESC_SPEC: 'key__desc_type_spec',
   DESC_HIDDEN: 'key__desc_hidden',
+  SHELL_ACTIVE: 'key__shell_active',
 };
 
 class Key {
@@ -23,13 +25,12 @@ class Key {
     this.keyType = keyMapItem.keyType;
     this.keyId = keyMapItem.keyCode;
     this.keyValues = keyMapItem.keyVal;
+    this.options = keyMapItem.options;
     this.textElements = [];
-    this.shellElement = document.createElement('button');
+    this.shellElement = createElement({ tagName: 'div', className: [CssClasses.BLOCK, CssClasses.SHELL].join(' ') });
 
     /* Basic markup */
-    this.shellElement.className = [CssClasses.BLOCK, CssClasses.SHELL].join(' ');
-    const span = document.createElement('span');
-    span.className = CssClasses.DESC;
+    const span = createElement({ tagName: 'span', className: CssClasses.DESC });
     if (this.keyType === 'spec') {
       span.classList.add(CssClasses.DESC_SPEC);
 
@@ -44,8 +45,7 @@ class Key {
       this.textElements.push(span);
     } else {
       span.classList.add(CssClasses.DESC_SUB);
-      const span1 = document.createElement('span');
-      span1.className = [CssClasses.DESC, CssClasses.DESC_ALT].join(' ');
+      const span1 = createElement({ tagName: 'span', className: [CssClasses.DESC, CssClasses.DESC_ALT].join(' ') });
 
       this.shellElement.classList.add(CssClasses.SH_SUB);
       this.shellElement.append(span, span1);
@@ -54,11 +54,13 @@ class Key {
 
     /* setup starting descriptions */
     for (let i = 0; i < this.textElements.length; i += 1) {
-      this.textElements[i].innerHTML = (this.keyType !== 'spec') ? String.fromCharCode(this.keyValues[0][i]) : this.keyValues[0];
+      this.textElements[i].textContent = (this.keyType !== 'spec') ? String.fromCharCode(this.keyValues[0][i]) : this.keyValues[0];
     }
     /* key options */
-    if (keyMapItem.options && keyMapItem.options.includes('stretch')) {
-      this.shellElement.classList.add(CssClasses.SH_STRETCH);
+    if (this.options) {
+      if (this.options.includes('stretch')) {
+        this.shellElement.classList.add(CssClasses.SH_STRETCH);
+      }
     }
 
     Key.keyArray.push(this);
@@ -68,7 +70,15 @@ class Key {
     return this.shellElement;
   }
 
-  setCase(/* charCase */) {
+  setActiveState(state) {
+    if (state) {
+      this.shellElement.classList.add(CssClasses.SHELL_ACTIVE);
+    } else {
+      this.shellElement.classList.remove(CssClasses.SHELL_ACTIVE);
+    }
+  }
+
+  setCase(/* charCase */) { // arg === [shift = bool, caps = bool]
     throw new Error(`setCase, not implemented, key id: ${this.keyId}`);
   }
 
@@ -94,4 +104,4 @@ class Key {
   }
 }
 
-export default Key;
+export { Key, CssClasses };

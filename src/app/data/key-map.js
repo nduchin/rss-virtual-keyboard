@@ -1,16 +1,36 @@
 const keyMap = [
   [
     { keyCode: 'Backquote', keyType: 'char', keyVal: [[96, 126], [91, 1]] },
-    { keyCode: 'Digit1', keyType: 'sub', keyVal: [[49, 33], [91, 1]] },
-    { keyCode: 'Digit2', keyType: 'sub', keyVal: [[50, 64], [91, 1]] },
-    { keyCode: 'Digit3', keyType: 'sub', keyVal: [[51, 35], [91, 1]] },
-    { keyCode: 'Digit4', keyType: 'sub', keyVal: [[52, 36], [91, 1]] },
-    { keyCode: 'Digit5', keyType: 'sub', keyVal: [[53, 37], [91, 1]] },
-    { keyCode: 'Digit6', keyType: 'sub', keyVal: [[54, 94], [91, 1]] },
-    { keyCode: 'Digit7', keyType: 'sub', keyVal: [[55, 38], [91, 1]] },
-    { keyCode: 'Digit8', keyType: 'sub', keyVal: [[56, 42], [91, 1]] },
-    { keyCode: 'Digit9', keyType: 'sub', keyVal: [[57, 40], [91, 1]] },
-    { keyCode: 'Digit0', keyType: 'sub', keyVal: [[48, 41], [91, 1]] },
+    {
+      keyCode: 'Digit1', keyType: 'sub', keyVal: [[49, 33], [91, 1]], options: ['capsImmune'],
+    },
+    {
+      keyCode: 'Digit2', keyType: 'sub', keyVal: [[50, 64], [91, 1]], options: ['capsImmune'],
+    },
+    {
+      keyCode: 'Digit3', keyType: 'sub', keyVal: [[51, 35], [91, 1]], options: ['capsImmune'],
+    },
+    {
+      keyCode: 'Digit4', keyType: 'sub', keyVal: [[52, 36], [91, 1]], options: ['capsImmune'],
+    },
+    {
+      keyCode: 'Digit5', keyType: 'sub', keyVal: [[53, 37], [91, 1]], options: ['capsImmune'],
+    },
+    {
+      keyCode: 'Digit6', keyType: 'sub', keyVal: [[54, 94], [91, 1]], options: ['capsImmune'],
+    },
+    {
+      keyCode: 'Digit7', keyType: 'sub', keyVal: [[55, 38], [91, 1]], options: ['capsImmune'],
+    },
+    {
+      keyCode: 'Digit8', keyType: 'sub', keyVal: [[56, 42], [91, 1]], options: ['capsImmune'],
+    },
+    {
+      keyCode: 'Digit9', keyType: 'sub', keyVal: [[57, 40], [91, 1]], options: ['capsImmune'],
+    },
+    {
+      keyCode: 'Digit0', keyType: 'sub', keyVal: [[48, 41], [91, 1]], options: ['capsImmune'],
+    },
     { keyCode: 'Minus', keyType: 'sub', keyVal: [[45, 95], [91, 1]] },
     { keyCode: 'Equal', keyType: 'sub', keyVal: [[61, 43], [91, 1]] },
     {
