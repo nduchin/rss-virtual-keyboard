@@ -1,7 +1,13 @@
 class TyperInterface {
   constructor() {
     this.target = null;
-    this.selection = { start: 0, end: 0 };
+    this.selection = {
+      start: 0,
+      end: 0,
+      get length() {
+        return this.end - this.start;
+      },
+    };
   }
 
   getSelection() {
@@ -21,14 +27,47 @@ class TyperInterface {
 
   typer({ command, value }) {
     if (!this.target) { throw new Error('no target'); }
-    if (command === 'typing') {
-      const text = this.target.textContent;
-      this.target.textContent = text.slice(0, this.selection.start)
-        + value + text.slice(this.selection.end);
-      this.selection.start += 1;
-      this.selection.end = this.selection.start;
-      this.target.focus();
-      this.target.setSelectionRange(this.selection.start, this.selection.end);
+    switch (command) {
+      case 'typing': {
+        const text = this.target.textContent;
+        this.target.textContent = text.slice(0, this.selection.start)
+          + value + text.slice(this.selection.end);
+        this.selection.start += 1;
+        this.selection.end = this.selection.start;
+        this.target.focus();
+        this.target.setSelectionRange(this.selection.start, this.selection.end);
+        break;
+      }
+      case 'backspace': {
+        const text = this.target.textContent;
+        if (this.selection.length > 0) {
+          this.target.textContent = text.slice(0, this.selection.start)
+            + text.slice(this.selection.end);
+        } else if (this.selection.start > 0) {
+          this.target.textContent = text.slice(0, this.selection.start - 1)
+            + text.slice(this.selection.end);
+          this.selection.start -= 1;
+        }
+        this.selection.end = this.selection.start;
+        this.target.focus();
+        this.target.setSelectionRange(this.selection.start, this.selection.end);
+        break;
+      }
+      case 'delete': {
+        const text = this.target.textContent;
+        if (this.selection.length > 0) {
+          this.target.textContent = text.slice(0, this.selection.start)
+            + text.slice(this.selection.end);
+        } else if (this.selection.start < this.target.textContent.length) {
+          this.target.textContent = text.slice(0, this.selection.start)
+            + text.slice(this.selection.end + 1);
+        }
+        this.selection.end = this.selection.start;
+        this.target.focus();
+        this.target.setSelectionRange(this.selection.start, this.selection.end);
+        break;
+      }
+      default: break;
     }
   }
 }

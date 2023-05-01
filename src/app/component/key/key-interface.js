@@ -135,6 +135,8 @@ class KeyInterface {
       switch (this.keyId) {
         case 'Space': KeyInterface.typerInt.typer({ command: 'typing', value: ' ' }); break;
         case 'Enter': KeyInterface.typerInt.typer({ command: 'typing', value: '\r' }); break;
+        case 'Backspace': KeyInterface.typerInt.typer({ command: 'backspace', value: '' }); break;
+        case 'Delete': KeyInterface.typerInt.typer({ command: 'delete', value: '' }); break;
         default: break;
       }
     } else {
