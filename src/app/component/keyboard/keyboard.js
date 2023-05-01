@@ -28,7 +28,7 @@ function createKeyboard(target) {
   target.addEventListener('blur', KeyInterface.typerInt.resetSelection.bind(KeyInterface.typerInt));
   KeyInterface.typerInt.resetSelection();
 
-  const localLang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 0;
+  const localLang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'en';
   KeyInterface.languages = languages;
   KeyInterface.lang = languages.indexOf(localLang);
   KeyInterface.setGlobalShellStyle();

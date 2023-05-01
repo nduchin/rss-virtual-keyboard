@@ -28,7 +28,7 @@ const CssClasses = {
 class KeyInterface {
   static {
     KeyInterface.array = [];
-    KeyInterface.languages = [];
+    KeyInterface.languages = ['en'];
     KeyInterface.lang = 0;
     KeyInterface.flags = {
       alt: false,
