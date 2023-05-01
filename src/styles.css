@@ -1,3 +1,12 @@
-body {
-  padding: 15px;
+.wrap{
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 10px;
+  margin: 0 auto;
+}
+.wrap__textarea, .wrap__keyboard{
+  width: 100%;
 }

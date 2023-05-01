@@ -21,11 +21,13 @@ class KeyboardEventHandler {
     const { code } = event;
     if (this.keys[code]) {
       event.preventDefault();
+      const key = this.keys[code];
       if (!(code === 'CapsLock')) {
-        this.keys[code].setActiveState(true);
+        key.setActiveState(true);
       } else {
-        this.keys[code].setActiveState(event.getModifierState('CapsLock'));
+        key.setActiveState(event.getModifierState('CapsLock'));
       }
+      key.typer();
     }
     if (event.shiftKey && event.altKey) {
       KeyInterface.nextGlobalLang();
@@ -38,11 +40,12 @@ class KeyboardEventHandler {
   outerKeyup(event) {
     const { code } = event;
     if (this.keys[code]) {
+      const key = this.keys[code];
       event.preventDefault();
       if (!(code === 'CapsLock')) {
-        this.keys[code].setActiveState(false);
+        key.setActiveState(false);
       } else {
-        this.keys[code].setActiveState(event.getModifierState('CapsLock'));
+        key.setActiveState(event.getModifierState('CapsLock'));
       }
     }
     if (code === 'ShiftLeft' || code === 'ShiftRight' || code === 'CapsLock') {

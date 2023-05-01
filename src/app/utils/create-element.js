@@ -1,15 +1,14 @@
 export default function createElement({
-  tagName, className, textContent, onClickHendler,
+  tagName, className, events,
 }) {
   const element = document.createElement(tagName);
   if (className) {
     element.className = className;
   }
-  if (textContent) {
-    element.textContent = textContent;
-  }
-  if (onClickHendler) {
-    element.addEventListener('click', onClickHendler);
+  if (events) {
+    events.forEach((item) => {
+      element.addEventListener(item.event, item.handler);
+    });
   }
   return element;
 }

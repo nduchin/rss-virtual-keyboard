@@ -10,9 +10,8 @@ const CssClasses = {
   ROW: 'keyboard__row',
 };
 
-const keyboardHandler = new KeyboardEventHandler();
-
-function createKeyboard() {
+function createKeyboard(target) {
+  const keyboardHandler = new KeyboardEventHandler();
   const keyboard = createElement({ tagName: 'div', className: [CssClasses.BLOCK, CssClasses.SHELL].join(' ') });
   keyMap.forEach((keyRow) => {
     const row = createElement({ tagName: 'div', className: CssClasses.ROW });
@@ -23,6 +22,9 @@ function createKeyboard() {
     });
     keyboard.append(row);
   });
+  KeyInterface.typerInt.target = target;
+  target.addEventListener('click', KeyInterface.typerInt.getSelection.bind(KeyInterface.typerInt));
+  target.addEventListener('blur', KeyInterface.typerInt.resetSelection.bind(KeyInterface.typerInt));
   return keyboard;
 }
 

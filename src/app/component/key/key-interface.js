@@ -1,5 +1,6 @@
 import './key-interface.css';
 import createElement from '../../utils/create-element';
+import TyperInterface from './typer-interface';
 
 const CssClasses = {
   BLOCK: 'key',
@@ -27,6 +28,7 @@ class KeyInterface {
     KeyInterface.case = [false, false];
     KeyInterface.langLength = 2;
     KeyInterface.lang = 0;
+    KeyInterface.typerInt = new TyperInterface();
   }
 
   constructor(keyMapItem) {
@@ -35,8 +37,13 @@ class KeyInterface {
     this.keyId = keyMapItem.keyCode;
     this.keyValues = keyMapItem.keyVal;
     this.keyActive = false;
+    this.char = '';
     this.options = keyMapItem.options;
-    this.shellElement = createElement({ tagName: 'div', className: [CssClasses.BLOCK, CssClasses.SHELL, CssClasses.SH[this.keyType]].join(' ') });
+    this.shellElement = createElement({
+      tagName: 'div',
+      className: [CssClasses.BLOCK, CssClasses.SHELL, CssClasses.SH[this.keyType]].join(' '),
+      events: [{ event: 'mousedown', handler: this.click.bind(this) }],
+    });
 
     /* Basic markup */
     if (this.keyType === 'spec') {
@@ -94,6 +101,7 @@ class KeyInterface {
         }
       }
 
+      this.char = this.keyValues[KeyInterface.lang][swap ? 'alt' : 'main'];
       this.descMain.textContent = this.keyValues[KeyInterface.lang][swap ? 'alt' : 'main'];
       this.descAlt.textContent = this.keyValues[KeyInterface.lang][swap ? 'main' : 'alt'];
     }
@@ -106,6 +114,31 @@ class KeyInterface {
     } else {
       this.shellElement.classList.remove(CssClasses.SHELL_ACTIVE);
       this.keyActive = false;
+    }
+  }
+
+  toggleActiveState() {
+    this.setActiveState(!this.keyActive);
+  }
+
+  click(event) {
+    event.preventDefault();
+    if (this.keyType === 'spec' && this.options.includes('semisticky')) {
+      this.toggleActiveState();
+    } else {
+      this.typer();
+    }
+  }
+
+  typer() {
+    if (this.keyType === 'spec') {
+      switch (this.keyId) {
+        case 'Space': KeyInterface.typerInt.typer({ command: 'typing', value: ' ' }); break;
+        case 'Enter': KeyInterface.typerInt.typer({ command: 'typing', value: '\r' }); break;
+        default: break;
+      }
+    } else {
+      KeyInterface.typerInt.typer({ command: 'typing', value: this.char });
     }
   }
 
