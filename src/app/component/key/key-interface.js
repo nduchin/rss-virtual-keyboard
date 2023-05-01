@@ -217,9 +217,7 @@ class KeyInterface {
         KeyInterface.setGlobalShellStyle();
         KeyInterface.setGlobalChar();
       }
-    }
-
-    if (!this.options || !(this.options.includes('sticky') || this.options.includes('semisticky'))) {
+    } else if (!this.options || !(this.options.includes('sticky') || this.options.includes('semisticky'))) {
       KeyInterface.typerInt.typer({ command: 'typing', value: this.char, flags: KeyInterface.flags });
       KeyInterface.resetPended();
     }

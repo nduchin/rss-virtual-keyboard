@@ -49,6 +49,7 @@ class TyperInterface {
           this.selection.start -= 1;
         }
         this.selection.end = this.selection.start;
+
         break;
       }
 
@@ -62,6 +63,7 @@ class TyperInterface {
             + text.slice(this.selection.end + 1);
         }
         this.selection.end = this.selection.start;
+
         break;
       }
 
@@ -70,8 +72,9 @@ class TyperInterface {
           this.selection.end = this.selection.start;
         } else if (this.selection.start > 0) {
           this.selection.start -= 1;
-          this.selection.end -= 1;
+          this.selection.end = this.selection.start;
         }
+
         break;
       }
 
@@ -80,8 +83,9 @@ class TyperInterface {
           this.selection.start = this.selection.end;
         } else if (this.selection.start > 0) {
           this.selection.start += 1;
-          this.selection.end += 1;
+          this.selection.end = this.selection.start;
         }
+
         break;
       }
       default: break;
