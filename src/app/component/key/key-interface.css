@@ -46,12 +46,6 @@
   line-height: 34px;
   color: #ebe7d1;
 }
-
-.key__desc_type_char{
-  font-size: 20px;
-  text-align: center;
-  line-height: 34px;
-}
 .key__desc_type_letter-main{
   font-size: 20px;
   text-align: center;
@@ -75,10 +69,10 @@
   transform: translateY(0);
   box-shadow: 0 3px 3px rgba(19, 32, 27, 0.8)
 }
-/* TODO: rename pseudo -lasses */
+
 .key__shell:active, .key__shell_active{
   transform: translateY(2px);
-  box-shadow: 0 1px 4px black;
+  box-shadow: 0 1px 4px rgba(19, 32, 27, 0.8);
 }
 
 .key__shell_type_spec:active, .key__shell_type_spec.key__shell_active{

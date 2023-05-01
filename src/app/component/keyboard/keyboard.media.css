@@ -1,0 +1,28 @@
+@media (max-width: 767.98px){
+  .keyboard{
+    width: fit-content;
+    padding: 5px;
+  }
+  .keyboard__shell{
+    max-width: 800px;
+    min-width: fit-content;
+    min-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background-color: #7f8887;
+    border: solid #4b5050 2px;
+    border-radius: 5px;
+  }
+  .keyboard__row{
+    display: grid;
+    grid-template-columns: repeat(15, 35px);
+    gap: 2px;
+  }
+  .keyboard__row:last-child{
+    display: grid;
+    grid-template-columns: repeat(3, 35px) 1fr repeat(5, 35px);
+    gap: 2px;
+  }
+}
+

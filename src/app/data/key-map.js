@@ -14,7 +14,7 @@ const keyMap = [
     { keyCode: 'Minus', keyType: 'char', keyVal: [{ type: 'punct', main: '-', alt: '_' }, { type: 'punct', main: '-', alt: '_' }] },
     { keyCode: 'Equal', keyType: 'char', keyVal: [{ type: 'punct', main: '=', alt: '+' }, { type: 'punct', main: '=', alt: '+' }] },
     {
-      keyCode: 'Backspace', keyType: 'spec', keyVal: 'Backspace', options: ['stretch'],
+      keyCode: 'Backspace', keyType: 'spec', keyVal: 'Backspace', options: ['stretch', 'span2'],
     },
   ],
   [
@@ -38,7 +38,7 @@ const keyMap = [
   ],
   [
     {
-      keyCode: 'CapsLock', keyType: 'spec', keyVal: 'CapsLock', options: ['stretch', 'sticky'],
+      keyCode: 'CapsLock', keyType: 'spec', keyVal: 'CapsLock', options: ['stretch', 'sticky', 'span2'],
     },
     { keyCode: 'KeyA', keyType: 'char', keyVal: [{ type: 'letter', main: 'a', alt: 'A' }, { type: 'letter', main: 'ф', alt: 'Ф' }] },
     { keyCode: 'KeyS', keyType: 'char', keyVal: [{ type: 'letter', main: 's', alt: 'S' }, { type: 'letter', main: 'ы', alt: 'Ы' }] },
@@ -52,12 +52,12 @@ const keyMap = [
     { keyCode: 'Semicolon', keyType: 'char', keyVal: [{ type: 'punct', main: ';', alt: ':' }, { type: 'letter', main: 'ж', alt: 'Ж' }] },
     { keyCode: 'Quote', keyType: 'char', keyVal: [{ type: 'punct', main: '\'', alt: '"' }, { type: 'letter', main: 'э', alt: 'Э' }] },
     {
-      keyCode: 'Enter', keyType: 'spec', keyVal: 'Enter', options: ['stretch'],
+      keyCode: 'Enter', keyType: 'spec', keyVal: 'Enter', options: ['stretch', 'span2'],
     },
   ],
   [
     {
-      keyCode: 'ShiftLeft', keyType: 'spec', keyVal: 'Shift', options: ['stretch', 'semisticky'],
+      keyCode: 'ShiftLeft', keyType: 'spec', keyVal: 'Shift', options: ['stretch', 'semisticky', 'span2'],
     },
     { keyCode: 'KeyZ', keyType: 'char', keyVal: [{ type: 'letter', main: 'z', alt: 'Z' }, { type: 'letter', main: 'я', alt: 'Я' }] },
     { keyCode: 'KeyX', keyType: 'char', keyVal: [{ type: 'letter', main: 'x', alt: 'X' }, { type: 'letter', main: 'ч', alt: 'Ч' }] },
@@ -71,7 +71,7 @@ const keyMap = [
     { keyCode: 'Slash', keyType: 'char', keyVal: [{ type: 'punct', main: '/', alt: '?' }, { type: 'punct', main: '.', alt: ',' }] },
     { keyCode: 'ArrowUp', keyType: 'spec', keyVal: '↑' },
     {
-      keyCode: 'ShiftRight', keyType: 'spec', keyVal: 'Shift', options: ['stretch', 'semisticky'],
+      keyCode: 'ShiftRight', keyType: 'spec', keyVal: 'Shift', options: ['stretch', 'semisticky', 'span2'],
     },
   ],
   [

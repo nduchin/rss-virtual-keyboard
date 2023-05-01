@@ -1,4 +1,5 @@
 import './key-interface.css';
+import './key-interface.media.css';
 import createElement from '../../utils/create-element';
 import TyperInterface from './typer-interface';
 
@@ -8,6 +9,7 @@ const CssClasses = {
   SHELL: 'key__shell',
   SHELL_ACTIVE: 'key__shell_active',
   SHELL_STRETCH: 'key__shell_stretch',
+  SHELL_M_SP2: 'key__shell_media_span2',
   SH: {
     spec: 'key__shell_type_spec',
     letter: 'key__shell_type_letter',
@@ -92,6 +94,13 @@ class KeyInterface {
       }
       if (this.options.includes('semiwide')) {
         this.shellElement.classList.add(CssClasses.WIDE);
+      }
+      // media
+      if (this.options.includes('span2')) {
+        this.shellElement.classList.add(CssClasses.SHELL_M_SP2);
+      }
+      if (this.options.includes('span-auto')) {
+        this.shellElement.classList.add(CssClasses.SHELL_M_SPAUTO);
       }
     }
   }

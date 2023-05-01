@@ -1,4 +1,5 @@
 import './keyboard.css';
+import './keyboard.media.css';
 import KeyInterface from '../key/key-interface';
 import { keyMap, languages } from '../../data/key-map';
 import createElement from '../../utils/create-element';
