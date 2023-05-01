@@ -8,7 +8,7 @@ const CssClasses = {
 
 function createTextarea() {
   const textarea = createElement({ tagName: 'textarea', className: CssClasses.TEXTAREA });
-  textarea.rows = 15;
+  textarea.rows = 8;
 
   return textarea;
 }

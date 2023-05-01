@@ -7,6 +7,12 @@
   padding: 20px 10px;
   margin: 0 auto;
 }
+.wrap__title{
+
+}
+.wrap__p{
+  margin: 0.3em;
+}
 .wrap__textarea, .wrap__keyboard{
   width: 100%;
 }
