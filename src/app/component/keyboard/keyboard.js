@@ -25,6 +25,7 @@ function createKeyboard(target) {
   KeyInterface.typerInt.target = target;
   target.addEventListener('click', KeyInterface.typerInt.getSelection.bind(KeyInterface.typerInt));
   target.addEventListener('blur', KeyInterface.typerInt.resetSelection.bind(KeyInterface.typerInt));
+  KeyInterface.typerInt.resetSelection();
   return keyboard;
 }
 
