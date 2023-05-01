@@ -1,14 +1,6 @@
-import KeyInterface from '../component/key/key-interface';
-
 class KeyboardEventHandler {
   constructor() {
     this.keys = {};
-    this.modifiers = {
-      ctrlKey: false,
-      altKey: false,
-      shiftKey: false,
-      capsLochKey: false,
-    };
     document.addEventListener('keydown', this.outerKeydown.bind(this));
     document.addEventListener('keyup', this.outerKeyup.bind(this));
   }
@@ -18,38 +10,16 @@ class KeyboardEventHandler {
   }
 
   outerKeydown(event) {
-    const { code } = event;
-    if (this.keys[code]) {
+    if (this.keys[event.code]) {
       event.preventDefault();
-      const key = this.keys[code];
-      if (!(code === 'CapsLock')) {
-        key.setActiveState(true);
-      } else {
-        key.setActiveState(event.getModifierState('CapsLock'));
-      }
-      key.typer();
-    }
-    if (event.shiftKey && event.altKey) {
-      KeyInterface.nextGlobalLang();
-    }
-    if (code === 'ShiftLeft' || code === 'ShiftRight' || code === 'CapsLock') {
-      KeyInterface.setGlobalCase([event.shiftKey, event.getModifierState('CapsLock')]);
+      this.keys[event.code].press();
     }
   }
 
   outerKeyup(event) {
-    const { code } = event;
-    if (this.keys[code]) {
-      const key = this.keys[code];
+    if (this.keys[event.code]) {
       event.preventDefault();
-      if (!(code === 'CapsLock')) {
-        key.setActiveState(false);
-      } else {
-        key.setActiveState(event.getModifierState('CapsLock'));
-      }
-    }
-    if (code === 'ShiftLeft' || code === 'ShiftRight' || code === 'CapsLock') {
-      KeyInterface.setGlobalCase([event.shiftKey, event.getModifierState('CapsLock')]);
+      this.keys[event.code].relese();
     }
   }
 }

@@ -22,12 +22,20 @@ const CssClasses = {
     punctAlt: 'key__desc_type_punct-alt',
   },
 };
+
 class KeyInterface {
   static {
     KeyInterface.array = [];
-    KeyInterface.case = [false, false];
     KeyInterface.languages = [];
     KeyInterface.lang = 0;
+    KeyInterface.flags = {
+      alt: false,
+      caps: false,
+      ctrl: false,
+      shift: false,
+    };
+    KeyInterface.pendedKeys = [];
+
     KeyInterface.typerInt = new TyperInterface();
   }
 
@@ -95,12 +103,11 @@ class KeyInterface {
       let swap = false;
       if (shiftCheck) {
         if (this.keyType === 'letter') {
-          swap = !(KeyInterface.case[0] === KeyInterface.case[1]);
+          swap = KeyInterface.flags.caps === !KeyInterface.flags.shift;
         } else {
-          swap = !!KeyInterface.case[0];
+          swap = KeyInterface.flags.shift;
         }
       }
-      console.debug(this);
       this.char = this.keyValues[KeyInterface.lang][swap ? 'alt' : 'main'];
       this.descMain.textContent = this.keyValues[KeyInterface.lang][swap ? 'alt' : 'main'];
       this.descAlt.textContent = this.keyValues[KeyInterface.lang][swap ? 'main' : 'alt'];
@@ -123,10 +130,68 @@ class KeyInterface {
 
   click(event) {
     event.preventDefault();
-    if (this.keyType === 'spec' && this.options && this.options.includes('semisticky')) {
+    if (this.options && (this.options.includes('sticky') || this.options.includes('semisticky'))) {
       this.toggleActiveState();
-    } else {
-      this.typer();
+      if (this.options.includes('semisticky')) {
+        if (KeyInterface.pendedKeys.includes(this)) {
+          KeyInterface.pendedKeys.splice(KeyInterface.pendedKeys.indexOf(this), 1);
+        } else {
+          KeyInterface.pendedKeys.push(this);
+        }
+      }
+
+      if (this.keyType === 'spec') {
+        if (this.keyActive) {
+          KeyInterface.setFlag(this, true);
+        } else {
+          KeyInterface.setFlag(this, false);
+          if (KeyInterface.pendedKeys.length > 0) { KeyInterface.setFlagFromPended(); }
+        }
+
+        this.caserCheck();
+      }
+    }
+
+    this.typer();
+  }
+
+  press() {
+    if (!this.options || !this.options.includes('sticky')) {
+      this.setActiveState(true);
+    } else if (this.keyId === 'CapsLock') {
+      this.toggleActiveState();
+    }
+
+    if (this.keyType === 'spec') {
+      if (!this.options || !this.options.includes('sticky')) {
+        KeyInterface.setFlag(this, true);
+      } else if (this.keyActive) {
+        KeyInterface.setFlag(this, true);
+      } else {
+        KeyInterface.setFlag(this, false);
+        if (KeyInterface.pendedKeys.length > 0) { KeyInterface.setFlagFromPended(); }
+      }
+
+      this.caserCheck();
+    }
+
+    this.typer();
+  }
+
+  relese() {
+    if (this.keyId !== 'CapsLock') {
+      this.setActiveState(false);
+    } else if (this.options && this.options.includes('semisticky') && KeyInterface.pendedKeys.includes(this)) {
+      KeyInterface.pendedKeys.splice(KeyInterface.pendedKeys.indexOf(this), 1);
+    }
+
+    if (this.keyType === 'spec' && !(this.options && this.options.includes('sticky'))) {
+      KeyInterface.setFlag(this, false);
+      if (KeyInterface.pendedKeys.length > 0) { KeyInterface.setFlagFromPended(); }
+    }
+
+    if (this.keyType === 'spec') {
+      this.caserCheck();
     }
   }
 
@@ -141,8 +206,28 @@ class KeyInterface {
         case 'ArrowRight': KeyInterface.typerInt.typer({ command: 'right', value: '' }); break;
         default: break;
       }
-    } else {
-      KeyInterface.typerInt.typer({ command: 'typing', value: this.char });
+
+      if (
+        (this.keyId === 'AltLeft' || this.keyId === 'AltRight'
+        || this.keyId === 'ControlLeft' || this.keyId === 'ControlRight')
+        && KeyInterface.flags.alt && KeyInterface.flags.ctrl && !KeyInterface.flags.shift
+      ) {
+        KeyInterface.nextGlobalLang();
+        KeyInterface.resetPended();
+        KeyInterface.setGlobalShellStyle();
+        KeyInterface.setGlobalChar();
+      }
+    }
+
+    if (!this.options || !(this.options.includes('sticky') || this.options.includes('semisticky'))) {
+      KeyInterface.typerInt.typer({ command: 'typing', value: this.char, flags: KeyInterface.flags });
+      KeyInterface.resetPended();
+    }
+  }
+
+  caserCheck() {
+    if (this.keyId === 'ShiftLeft' || this.keyId === 'ShiftRight' || this.keyId === 'CapsLock') {
+      KeyInterface.setGlobalChar(true);
     }
   }
 
@@ -154,23 +239,47 @@ class KeyInterface {
     KeyInterface.array.forEach((key) => { key.setChar(shift); });
   }
 
-  static setGlobalCase(charCase) {
-    if (charCase.some((a, i) => KeyInterface.case[i] !== a)) {
-      KeyInterface.case = charCase;
-    }
-    KeyInterface.setGlobalChar(true);
-  }
-
   static nextGlobalLang() {
     KeyInterface.lang = (KeyInterface.lang + 1) % KeyInterface.languages.length;
-    KeyInterface.setGlobalShellStyle();
-    KeyInterface.setGlobalChar(true);
     localStorage.setItem('lang', KeyInterface.languages[KeyInterface.lang]);
   }
 
-  static resetKeyArray() {
-    KeyInterface.array = [];
-    // TODO: should delete all keys
+  static resetPended() {
+    for (let i = 0; i < KeyInterface.pendedKeys.length; i += 1) {
+      KeyInterface.pendedKeys[i].setActiveState(false);
+      KeyInterface.setFlag(KeyInterface.pendedKeys[i], false);
+    }
+    KeyInterface.setGlobalChar(true);
+    KeyInterface.pendedKeys = [];
+  }
+
+  static setFlag(key, state) {
+    switch (key.keyId) {
+      case 'AltLeft':
+      case 'AltRight': {
+        KeyInterface.flags.alt = state;
+        break;
+      }
+      case 'CapsLock': {
+        KeyInterface.flags.caps = state;
+        break;
+      }
+      case 'ControlLeft':
+      case 'ControlRight': {
+        KeyInterface.flags.ctrl = state;
+        break;
+      }
+      case 'ShiftLeft':
+      case 'ShiftRight': {
+        KeyInterface.flags.shift = state;
+        break;
+      }
+      default: break;
+    }
+  }
+
+  static setFlagFromPended() {
+    KeyInterface.pendedKeys.forEach((key) => KeyInterface.setFlag(key, true));
   }
 }
 

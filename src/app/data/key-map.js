@@ -57,7 +57,7 @@ const keyMap = [
   ],
   [
     {
-      keyCode: 'ShiftLeft', keyType: 'spec', keyVal: 'Shift', options: ['stretch'],
+      keyCode: 'ShiftLeft', keyType: 'spec', keyVal: 'Shift', options: ['stretch', 'semisticky'],
     },
     { keyCode: 'KeyZ', keyType: 'char', keyVal: [{ type: 'letter', main: 'z', alt: 'Z' }, { type: 'letter', main: 'я', alt: 'Я' }] },
     { keyCode: 'KeyX', keyType: 'char', keyVal: [{ type: 'letter', main: 'x', alt: 'X' }, { type: 'letter', main: 'ч', alt: 'Ч' }] },
@@ -71,30 +71,30 @@ const keyMap = [
     { keyCode: 'Slash', keyType: 'char', keyVal: [{ type: 'punct', main: '/', alt: '?' }, { type: 'punct', main: '.', alt: ',' }] },
     { keyCode: 'ArrowUp', keyType: 'spec', keyVal: '↑' },
     {
-      keyCode: 'ShiftRight', keyType: 'spec', keyVal: 'Shift', options: ['stretch'],
+      keyCode: 'ShiftRight', keyType: 'spec', keyVal: 'Shift', options: ['stretch', 'semisticky'],
     },
   ],
   [
     {
-      keyCode: 'ControlLeft', keyType: 'spec', keyVal: 'Ctrl', options: ['semiwide'],
+      keyCode: 'ControlLeft', keyType: 'spec', keyVal: 'Ctrl', options: ['semiwide', 'semisticky'],
     },
     {
       keyCode: 'MetaLeft', keyType: 'spec', keyVal: 'Win', options: ['semiwide'],
     },
     {
-      keyCode: 'AltLeft', keyType: 'spec', keyVal: 'Alt', options: ['semiwide'],
+      keyCode: 'AltLeft', keyType: 'spec', keyVal: 'Alt', options: ['semiwide', 'semisticky'],
     },
     {
       keyCode: 'Space', keyType: 'spec', keyVal: '', options: ['stretch'],
     },
     {
-      keyCode: 'AltRight', keyType: 'spec', keyVal: 'Alt', options: ['semiwide'],
+      keyCode: 'AltRight', keyType: 'spec', keyVal: 'Alt', options: ['semiwide', 'semisticky'],
     },
     { keyCode: 'ArrowLeft', keyType: 'spec', keyVal: '←' },
     { keyCode: 'ArrowDown', keyType: 'spec', keyVal: '↓' },
     { keyCode: 'ArrowRight', keyType: 'spec', keyVal: '→' },
     {
-      keyCode: 'ControlRight', keyType: 'spec', keyVal: 'Ctrl', options: ['semiwide'],
+      keyCode: 'ControlRight', keyType: 'spec', keyVal: 'Ctrl', options: ['semiwide', 'semisticky'],
     },
   ],
 ];
