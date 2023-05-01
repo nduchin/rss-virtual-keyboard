@@ -26,7 +26,7 @@ class KeyInterface {
   static {
     KeyInterface.array = [];
     KeyInterface.case = [false, false];
-    KeyInterface.langLength = 2;
+    KeyInterface.languages = [];
     KeyInterface.lang = 0;
     KeyInterface.typerInt = new TyperInterface();
   }
@@ -100,7 +100,7 @@ class KeyInterface {
           swap = !!KeyInterface.case[0];
         }
       }
-
+      console.debug(this);
       this.char = this.keyValues[KeyInterface.lang][swap ? 'alt' : 'main'];
       this.descMain.textContent = this.keyValues[KeyInterface.lang][swap ? 'alt' : 'main'];
       this.descAlt.textContent = this.keyValues[KeyInterface.lang][swap ? 'main' : 'alt'];
@@ -162,9 +162,10 @@ class KeyInterface {
   }
 
   static nextGlobalLang() {
-    KeyInterface.lang = (KeyInterface.lang + 1) % KeyInterface.langLength;
+    KeyInterface.lang = (KeyInterface.lang + 1) % KeyInterface.languages.length;
     KeyInterface.setGlobalShellStyle();
     KeyInterface.setGlobalChar(true);
+    localStorage.setItem('lang', KeyInterface.languages[KeyInterface.lang]);
   }
 
   static resetKeyArray() {

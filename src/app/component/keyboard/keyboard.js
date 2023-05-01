@@ -1,6 +1,6 @@
 import './keyboard.css';
 import KeyInterface from '../key/key-interface';
-import keyMap from '../../data/key-map';
+import { keyMap, languages } from '../../data/key-map';
 import createElement from '../../utils/create-element';
 import KeyboardEventHandler from '../../utils/keyboard-handler';
 
@@ -26,6 +26,13 @@ function createKeyboard(target) {
   target.addEventListener('click', KeyInterface.typerInt.getSelection.bind(KeyInterface.typerInt));
   target.addEventListener('blur', KeyInterface.typerInt.resetSelection.bind(KeyInterface.typerInt));
   KeyInterface.typerInt.resetSelection();
+
+  const localLang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 0;
+  KeyInterface.languages = languages;
+  KeyInterface.lang = languages.indexOf(localLang);
+  KeyInterface.setGlobalShellStyle();
+  KeyInterface.setGlobalChar();
+
   return keyboard;
 }
 

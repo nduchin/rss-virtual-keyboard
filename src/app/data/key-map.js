@@ -99,4 +99,6 @@ const keyMap = [
   ],
 ];
 
-export default keyMap;
+const languages = ['en', 'ru'];
+
+export { keyMap, languages };
