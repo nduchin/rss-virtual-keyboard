@@ -1,0 +1,20 @@
+.keyboard{
+  box-sizing: border-box;
+  padding: 15px;
+}
+.keyboard__shell{
+  max-width: 800px;
+  min-width: fit-content;
+  min-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #c5ded5;
+  border: solid #6a7772 2px;
+  border-radius: 20px;
+}
+.keyboard__row{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
