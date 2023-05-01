@@ -25,7 +25,7 @@ class TyperInterface {
     this.selection.end = this.target.textContent.length;
   }
 
-  typer({ command, value }) {
+  typer({ command, value /* , flags */ }) {
     if (!this.target) { throw new Error('no target'); }
     switch (command) {
       case 'typing': {
@@ -34,10 +34,10 @@ class TyperInterface {
           + value + text.slice(this.selection.end);
         this.selection.start += 1;
         this.selection.end = this.selection.start;
-        this.target.focus();
-        this.target.setSelectionRange(this.selection.start, this.selection.end);
+
         break;
       }
+
       case 'backspace': {
         const text = this.target.textContent;
         if (this.selection.length > 0) {
@@ -49,10 +49,9 @@ class TyperInterface {
           this.selection.start -= 1;
         }
         this.selection.end = this.selection.start;
-        this.target.focus();
-        this.target.setSelectionRange(this.selection.start, this.selection.end);
         break;
       }
+
       case 'delete': {
         const text = this.target.textContent;
         if (this.selection.length > 0) {
@@ -63,12 +62,32 @@ class TyperInterface {
             + text.slice(this.selection.end + 1);
         }
         this.selection.end = this.selection.start;
-        this.target.focus();
-        this.target.setSelectionRange(this.selection.start, this.selection.end);
+        break;
+      }
+
+      case 'left': {
+        if (this.selection.length > 0) {
+          this.selection.end = this.selection.start;
+        } else if (this.selection.start > 0) {
+          this.selection.start -= 1;
+          this.selection.end -= 1;
+        }
+        break;
+      }
+
+      case 'right': {
+        if (this.selection.length > 0) {
+          this.selection.start = this.selection.end;
+        } else if (this.selection.start > 0) {
+          this.selection.start += 1;
+          this.selection.end += 1;
+        }
         break;
       }
       default: break;
     }
+    this.target.focus();
+    this.target.setSelectionRange(this.selection.start, this.selection.end);
   }
 }
 

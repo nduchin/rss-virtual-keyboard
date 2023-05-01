@@ -123,7 +123,7 @@ class KeyInterface {
 
   click(event) {
     event.preventDefault();
-    if (this.keyType === 'spec' && this.options.includes('semisticky')) {
+    if (this.keyType === 'spec' && this.options && this.options.includes('semisticky')) {
       this.toggleActiveState();
     } else {
       this.typer();
@@ -137,6 +137,8 @@ class KeyInterface {
         case 'Enter': KeyInterface.typerInt.typer({ command: 'typing', value: '\r' }); break;
         case 'Backspace': KeyInterface.typerInt.typer({ command: 'backspace', value: '' }); break;
         case 'Delete': KeyInterface.typerInt.typer({ command: 'delete', value: '' }); break;
+        case 'ArrowLeft': KeyInterface.typerInt.typer({ command: 'left', value: '' }); break;
+        case 'ArrowRight': KeyInterface.typerInt.typer({ command: 'right', value: '' }); break;
         default: break;
       }
     } else {
