@@ -208,7 +208,8 @@ class KeyInterface {
     if (this.keyType === 'spec') {
       switch (this.keyId) {
         case 'Space': KeyInterface.typerInt.typer({ command: 'typing', value: ' ' }); break;
-        case 'Enter': KeyInterface.typerInt.typer({ command: 'typing', value: '\r' }); break;
+        case 'Enter': KeyInterface.typerInt.typer({ command: 'typing', value: '\n' }); break;
+        case 'Tab': KeyInterface.typerInt.typer({ command: 'typing', value: '\t' }); break;
         case 'Backspace': KeyInterface.typerInt.typer({ command: 'backspace', value: '' }); break;
         case 'Delete': KeyInterface.typerInt.typer({ command: 'delete', value: '' }); break;
         case 'ArrowLeft': KeyInterface.typerInt.typer({ command: 'left', value: '' }); break;
