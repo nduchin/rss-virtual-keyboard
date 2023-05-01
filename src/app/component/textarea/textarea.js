@@ -1,4 +1,5 @@
 import './textarea.css';
+import './textarea.media.css';
 import createElement from '../../utils/create-element';
 
 const CssClasses = {

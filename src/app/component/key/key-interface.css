@@ -11,7 +11,6 @@
   box-sizing: border-box;
   display: flex;
   padding: 3px 5px;
-  border: none;
   border-radius: 5px;
 }
 .key__shell_type_spec{

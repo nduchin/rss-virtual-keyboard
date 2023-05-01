@@ -1,5 +1,7 @@
 import './normalize.css';
 import './styles.css';
+import './styles.media.css';
+
 import createTextarea from './app/component/textarea/textarea';
 import createKeyboard from './app/component/keyboard/keyboard';
 

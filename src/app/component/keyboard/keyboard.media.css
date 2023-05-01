@@ -4,11 +4,6 @@
     padding: 5px;
   }
   .keyboard__shell{
-    max-width: 800px;
-    min-width: fit-content;
-    min-height: fit-content;
-    display: flex;
-    flex-direction: column;
     gap: 2px;
     background-color: #7f8887;
     border: solid #4b5050 2px;
@@ -20,9 +15,23 @@
     gap: 2px;
   }
   .keyboard__row:last-child{
-    display: grid;
     grid-template-columns: repeat(3, 35px) 1fr repeat(5, 35px);
-    gap: 2px;
+  }
+}
+@media (max-width: 574.98px) {
+  .keyboard{
+    padding: 2px;
+  }
+  .keyboard__shell{
+    gap: 0;
+    border-radius: 2px;
+  }
+  .keyboard__row{
+    grid-template-columns: repeat(15, 30px);
+    gap: 0;
+  }
+  .keyboard__row:last-child{
+    grid-template-columns: repeat(3, 30px) 1fr repeat(5, 30px);
   }
 }
 

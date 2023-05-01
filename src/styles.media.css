@@ -1,0 +1,14 @@
+@media (max-width: 768px){
+  .wrap{
+    height: 100%;
+    max-width: 850px;
+    padding: 10px 10px;
+  }
+  .wrap__textarea {
+    width: 100%;
+  }
+  .wrap__keyboard {
+    position: fixed;
+    bottom: 0;
+  }
+}
