@@ -38,7 +38,7 @@ class TyperInterface {
         break;
       }
 
-      case 'backspace': {
+      case 'Backspace': {
         const text = this.target.textContent;
         if (this.selection.length > 0) {
           this.target.textContent = text.slice(0, this.selection.start)
@@ -53,7 +53,7 @@ class TyperInterface {
         break;
       }
 
-      case 'delete': {
+      case 'Delete': {
         const text = this.target.textContent;
         if (this.selection.length > 0) {
           this.target.textContent = text.slice(0, this.selection.start)
@@ -67,7 +67,7 @@ class TyperInterface {
         break;
       }
 
-      case 'left': {
+      case 'ArrowLeft': {
         if (this.selection.length > 0) {
           this.selection.end = this.selection.start;
         } else if (this.selection.start > 0) {
@@ -78,7 +78,7 @@ class TyperInterface {
         break;
       }
 
-      case 'right': {
+      case 'ArrowRight': {
         if (this.selection.length > 0) {
           this.selection.start = this.selection.end;
         } else if (this.selection.start > 0) {
