@@ -210,11 +210,7 @@ class KeyInterface {
         case 'Space': KeyInterface.typerInt.typer({ command: 'typing', value: ' ' }); break;
         case 'Enter': KeyInterface.typerInt.typer({ command: 'typing', value: '\n' }); break;
         case 'Tab': KeyInterface.typerInt.typer({ command: 'typing', value: '\t' }); break;
-        case 'Backspace': KeyInterface.typerInt.typer({ command: 'backspace', value: '' }); break;
-        case 'Delete': KeyInterface.typerInt.typer({ command: 'delete', value: '' }); break;
-        case 'ArrowLeft': KeyInterface.typerInt.typer({ command: 'left', value: '' }); break;
-        case 'ArrowRight': KeyInterface.typerInt.typer({ command: 'right', value: '' }); break;
-        default: break;
+        default: KeyInterface.typerInt.typer({ command: this.keyId, value: '' }); break;
       }
 
       if (
